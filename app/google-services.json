@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "844429637193",
+    "firebase_url": "https://student-assistant-4a3ad.firebaseio.com",
+    "project_id": "student-assistant-4a3ad",
+    "storage_bucket": "student-assistant-4a3ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844429637193:android:d6d9dc7a0e8e3d48",
+        "android_client_info": {
+          "package_name": "id.sch.smktelkom_mlg.learn.studentassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844429637193-68cj86cdufnol89289ia7bpcv4s3ovc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALju0x9Hy-495l9mdx5_2r0bvUf-MJ30A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

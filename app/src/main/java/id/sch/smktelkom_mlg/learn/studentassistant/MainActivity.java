@@ -84,20 +84,13 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (intent.resolveActivity(getPackageManager()) != null)
-                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-        } else if (id == R.id.nav_gallery) {
-            hello = (TextView) findViewById(R.id.textView);
-            hello.setText("Gallery Clicked");
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_setting) {
+            startActivity(new Intent(MainActivity.this, Setting.class));
+        } else if (id == R.id.nav_language) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_about) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
 
         }
 
