@@ -1,38 +1,78 @@
 package id.sch.smktelkom_mlg.learn.studentassistant;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+
+import id.sch.smktelkom_mlg.learn.studentassistant.Data.Data;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    static final String username = "sandyfschool";
+    final static String DB_URL = "https://studassist-f6998.firebaseio.com/" + username;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     TextView hello;
+    Firebase fire;
+    ArrayList<String> names = new ArrayList<>();
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Firebase.setAndroidContext(this);
+        fire = new Firebase(DB_URL);
+        this.retrieveData();
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                // if(firebaseAuth.getCurrentUser() == null ){
+                //    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                //}
+
+
+            }
+        };
+        getnotif();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.openDrawer(GravityCompat.START);
+                //startActivity(new Intent(MainActivity.this, InputJadwal.class));
+                startActivity(new Intent(MainActivity.this, inputTugas.class));
             }
         });
 
@@ -84,25 +124,91 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (intent.resolveActivity(getPackageManager()) != null)
-                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-        } else if (id == R.id.nav_gallery) {
-            hello = (TextView) findViewById(R.id.textView);
-            hello.setText("Gallery Clicked");
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_setting) {
+            startActivity(new Intent(MainActivity.this, Setting.class));
+        } else if (id == R.id.nav_language) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_about) {
+            startActivity(new Intent(MainActivity.this, About.class));
+        } else if (id == R.id.nav_logout) {
+            mAuth.signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void getnotif() {
+        NotificationManager notifmgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pintent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+
+        Notification noti = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_announcement_black_24dp)
+                .setContentTitle("Welcome!")
+                .setContentText("Thanks For Using Our Application!")
+                .setContentIntent(pintent)
+                .build();
+        notifmgr.notify(0, noti);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    private void retrieveData() {
+        fire.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                getUpdates(dataSnapshot);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                getUpdates(dataSnapshot);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+
+    private void getUpdates(DataSnapshot ds) {
+        names.clear();
+        for (DataSnapshot data : ds.getChildren()) {
+            Data p = new Data();
+            p.setPelajaran(data.getValue(Data.class).getPelajaran());
+
+            names.add(p.getPelajaran());
+        }
+
+        if (names.size() > 0) {
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names);
+            RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
+            //myView.setHasFixedSize(true);
+            myView.setAdapter(adapter);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            myView.setLayoutManager(llm);
+        } else {
+            Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
+        }
     }
 }
