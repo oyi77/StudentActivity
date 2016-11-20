@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -31,15 +32,17 @@ import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    //static final String username = "sandyfschool";
+   // final static String DB_URL = "https://studassist-f6998.firebaseio.com/" + username;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     TextView hello;
     Firebase fire;
-    String Uvalue, GUvalue = "sandyfschool";
+    String Uvalue = "sandyfschool";
     ArrayList<String> names = new ArrayList<>();
+    ArrayList<String> content = new ArrayList<>();   //menyimpan isi
+    ArrayList<String> date = new ArrayList<>();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    //ImageButton imgbtn;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +50,9 @@ public class MainActivity extends AppCompatActivity
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
                 if (firebaseAuth.getCurrentUser() != null) {
-                    GUvalue = firebaseAuth.getCurrentUser().getEmail().toString();
+                    Uvalue = firebaseAuth.getCurrentUser().getEmail().toString();
                     System.out.println(Uvalue);
                 } else {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -60,15 +64,20 @@ public class MainActivity extends AppCompatActivity
         };
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            GUvalue = extras.getString("username");
+            Uvalue = extras.getString("username");
+        }else{
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         }
 
-        Uvalue = GUvalue;
+
         if (Uvalue.contains(".") || Uvalue.contains(",")) {
-            Uvalue = Uvalue.replace("@gmail.com", "");
             Uvalue = Uvalue.replace(".", "");
             Uvalue = Uvalue.replace(",", "");
+            Uvalue = Uvalue.replace("@gmail", "");
         }
+        System.out.println("Ini Uvalue :"+ Uvalue);
+
         final String username = Uvalue;
         final String DB_URL = "https://studassist-f6998.firebaseio.com/" + username;
         setContentView(R.layout.activity_main);
@@ -85,46 +94,21 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 //startActivity(new Intent(MainActivity.this, InputJadwal.class));
                 Intent intent = new Intent(MainActivity.this, inputTugas.class);
-                intent.putExtra("username", Uvalue);
+                intent.putExtra("username", username);
                 startActivity(intent);
-                finish();
+               // startActivity(new Intent(MainActivity.this, inputTugas.class));
             }
         });
 
-        //set drawer layout
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        // Find our drawer view
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        // Tie DrawerLayout events to the ActionBarToggle
-
-        // Setup drawer view
-
-        View headerView = getLayoutInflater().inflate(R.layout.nav_header_main, navigationView, false);
-        navigationView.addHeaderView(headerView);
-
-    /* TODO get the IMAGE and make it clickable */
-
-        //imgbtn = (ImageButton) headerView.findViewById(R.id.imageView);
-        TextView headertext = (TextView) headerView.findViewById(R.id.headername);
-        TextView headermail = (TextView) headerView.findViewById(R.id.headermail);
-        headertext.setText(Uvalue);
-        headermail.setText(GUvalue);
-
-        headerView.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProfilePage.class));
-            }
-        });
-
     }
-
 
     @Override
     public void onBackPressed() {
@@ -158,20 +142,27 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -188,7 +179,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             mAuth.signOut();
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -234,15 +224,24 @@ public class MainActivity extends AppCompatActivity
 
     private void getUpdates(DataSnapshot ds) {
         names.clear();
+        content.clear();
+        date.clear();
+
+
         for (DataSnapshot data : ds.getChildren()) {
             Data p = new Data();
             p.setPelajaran(data.getValue(Data.class).getPelajaran());
+            p.setIsi(data.getValue(Data.class).getIsi());
+            p.setDue(data.getValue(Data.class).getDue());
+
 
             names.add(p.getPelajaran());
+            content.add(p.getIsi());
+            date.add(p.getDue());
         }
 
         if (names.size() > 0) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names);
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names, date, content);
             RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
             //myView.setHasFixedSize(true);
             myView.setAdapter(adapter);

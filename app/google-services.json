@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "844429637193",
-    "firebase_url": "https://student-assistant-4a3ad.firebaseio.com",
-    "project_id": "student-assistant-4a3ad",
-    "storage_bucket": "student-assistant-4a3ad.appspot.com"
+    "project_number": "257150934215",
+    "firebase_url": "https://studassist-f6998.firebaseio.com",
+    "project_id": "studassist-f6998",
+    "storage_bucket": "studassist-f6998.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:844429637193:android:d6d9dc7a0e8e3d48",
+        "mobilesdk_app_id": "1:257150934215:android:58699ae7f7a927b4",
         "android_client_info": {
           "package_name": "id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant"
         }
       },
       "oauth_client": [
         {
-          "client_id": "844429637193-68cj86cdufnol89289ia7bpcv4s3ovc2.apps.googleusercontent.com",
+          "client_id": "257150934215-a0kf05gakl8jt48654epo7su7u8lvcsd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyALju0x9Hy-495l9mdx5_2r0bvUf-MJ30A"
+          "current_key": "AIzaSyBD10mLKvV3t26vAb_92clAShOJEBHMtCY"
         }
       ],
       "services": {

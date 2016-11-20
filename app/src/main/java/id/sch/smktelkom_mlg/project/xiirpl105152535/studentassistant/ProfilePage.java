@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import id.sch.smktelkom_mlg.learn.studentassistant.R;
 
 public class ProfilePage extends AppCompatActivity {
 

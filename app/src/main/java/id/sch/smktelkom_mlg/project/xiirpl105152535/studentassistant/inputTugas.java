@@ -25,7 +25,6 @@ public class inputTugas extends AppCompatActivity {
     EditText isi;
     DatePicker due;
     Button btnSave;
-    String username = "sandyfschool";
     int dueadate, dueamonth, dueayear;
 
     Calendar cal = Calendar.getInstance();
@@ -34,6 +33,15 @@ public class inputTugas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_tugas);
+
+        String UValue = "";
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            UValue = extras.getString("username");
+        }
+
+        final String  username = UValue;
 
         pelajaran = (EditText) findViewById(R.id.editTextPelajaran);
         isi = (EditText) findViewById(R.id.editTextIsi);
@@ -44,10 +52,7 @@ public class inputTugas extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (dueayear < current.get(Calendar.YEAR) && dueamonth < current.get(Calendar.MONTH) || dueayear < current.get(Calendar.YEAR) && dueamonth < current.get(Calendar.DATE)) {
-                    Bundle extras = getIntent().getExtras();
-                    if (extras != null) {
-                        username = extras.getString("username");
-                    }
+
                     Firebase ref = new Firebase("https://studassist-f6998.firebaseio.com/");
                     //Getting values to store
 
@@ -56,11 +61,13 @@ public class inputTugas extends AppCompatActivity {
                     dueadate = due.getDayOfMonth();
                     dueamonth = due.getMonth();
                     dueayear = due.getYear();
+                    String duea = String.valueOf(dueadate) + "-" + String.valueOf(dueamonth) + "-" + String.valueOf(dueayear);
+
                     int dueahour = current.get(Calendar.HOUR_OF_DAY);
                     int dueaminute = current.get(Calendar.MINUTE);
                     cal.set(dueayear, dueamonth, dueadate - 1, dueahour, dueaminute);
                     String jam = String.valueOf(dueahour) + " " + String.valueOf(dueaminute);
-                    String duea = String.valueOf(dueadate) + "-" + String.valueOf(dueamonth) + "-" + String.valueOf(dueayear);
+
 
                     //Creating Person object
                     //Person person = new Person();
