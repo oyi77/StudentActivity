@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.learn.studentassistant;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -16,7 +16,7 @@ import com.firebase.client.Firebase;
 
 import java.util.Calendar;
 
-import id.sch.smktelkom_mlg.learn.studentassistant.Data.Data;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
 
 public class inputTugas extends AppCompatActivity {
 
