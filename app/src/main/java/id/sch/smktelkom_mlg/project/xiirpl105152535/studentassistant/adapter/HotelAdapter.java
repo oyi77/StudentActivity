@@ -1,5 +1,6 @@
 package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,15 @@ import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.model.Hotel
 
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> {
     ArrayList<Hotel> hotelList;
+    IHotelAdapter mIHotelAdapter;
 
     public HotelAdapter(ArrayList<Hotel> hotelList) {
         this.hotelList = hotelList;
+    }
+
+    public HotelAdapter(Context context, ArrayList<Hotel> hotelList) {
+        this.hotelList = hotelList;
+        mIHotelAdapter = (IHotelAdapter) context;
     }
 
     @Override
@@ -43,6 +50,10 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         return 0;
     }
 
+    public interface IHotelAdapter {
+        void doclick(int pos);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvJudul;
         TextView tvDeskripsi;
@@ -51,6 +62,13 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             super(itemView);
             tvJudul = (TextView) itemView.findViewById(R.id.textViewJudul);
             tvDeskripsi = (TextView) itemView.findViewById(R.id.textViewDeskripsi);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mIHotelAdapter.doclick(getAdapterPosition());
+                }
+            });
         }
+
     }
 }

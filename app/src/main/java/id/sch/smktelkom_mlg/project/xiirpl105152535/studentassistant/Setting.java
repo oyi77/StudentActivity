@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.adapter.HotelAdapter;
 import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.model.Hotel;
 
-public class Setting extends AppCompatActivity {
+public class Setting extends AppCompatActivity implements HotelAdapter.IHotelAdapter {
 
+    public static final String HOTEL = "hotel";
     ArrayList<Hotel> mList = new ArrayList<>();
     HotelAdapter mAdapter;
 
@@ -25,9 +26,8 @@ public class Setting extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new HotelAdapter(mList);
+        mAdapter = new HotelAdapter(this, mList);
         recyclerView.setAdapter(mAdapter);
-
 
         fillData();
 
@@ -56,4 +56,10 @@ public class Setting extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void doclick(int pos) {
+//        Intent intent = new Intent(this, Detailactivity.class);
+//        intent.putExtra(HOTEL,mList.get(pos));
+//        startActivity(intent);
+    }
 }

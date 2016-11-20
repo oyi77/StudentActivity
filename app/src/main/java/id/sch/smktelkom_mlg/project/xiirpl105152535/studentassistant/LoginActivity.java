@@ -121,11 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 } else {
                                     username = inputEmail.getText().toString();
-                                    if (username.contains(".") || username.contains(",")) {
-                                        username = username.replace(".", "");
-                                        username = username.replace(",", "");
-                                        username = username.replace("@gmail", "");
-                                    }
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     intent.putExtra("username", username);
                                     startActivity(intent);

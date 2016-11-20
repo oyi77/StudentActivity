@@ -59,11 +59,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                 String email = inputEmail.getText().toString().trim();
                 username = email;
-                if (email.contains(".") || email.contains(",")) {
-                    username = username.replace(".", "");
-                    username = username.replace(",", "");
-                    username = username.replace("@gmail", "");
-                }
                 String password = inputPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
