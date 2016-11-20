@@ -17,19 +17,18 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Setting"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Setting" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation"
             android:noHistory="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -43,7 +42,10 @@
             android:name=".InputJadwal"
             android:label="@string/title_activity_input_jadwal"
             android:theme="@style/AppTheme" />
-        <activity android:name=".inputTugas"></activity>
+        <activity android:name=".inputTugas" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".ProfilePage"></activity>
     </application>
 
 </manifest>
