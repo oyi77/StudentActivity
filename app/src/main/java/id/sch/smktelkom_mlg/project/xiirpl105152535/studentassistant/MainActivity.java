@@ -1,9 +1,11 @@
-package id.sch.smktelkom_mlg.learn.studentassistant;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant;
 
+import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +28,16 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-import id.sch.smktelkom_mlg.learn.studentassistant.Data.Data;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,16 +45,29 @@ public class MainActivity extends AppCompatActivity
     final static String DB_URL = "https://studassist-f6998.firebaseio.com/" + username;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     TextView hello;
+    int itemPos;
+
+
     Firebase fire;
-    ArrayList<String> names = new ArrayList<>();
+
+    ArrayList<String> names = new ArrayList<>();     //menyimpan nama mapel
+    ArrayList<String> content = new ArrayList<>();   //menyimpan isi
+    ArrayList<String> date = new ArrayList<>();      //menyimpan tanggal
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL);
@@ -67,6 +88,17 @@ public class MainActivity extends AppCompatActivity
         };
         getnotif();
 
+//        done.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//            }
+//        });
+
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +116,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+
+    }  //TUTUP ONCREATE
+
+    public void doEdit(int Pos){
+
     }
 
     @Override
@@ -156,9 +198,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onStart() {
-        super.onStart();
+        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
+// See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
 
         mAuth.addAuthStateListener(mAuthListener);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
     private void retrieveData() {
@@ -192,23 +239,63 @@ public class MainActivity extends AppCompatActivity
 
     private void getUpdates(DataSnapshot ds) {
         names.clear();
+        content.clear();
+        date.clear();
+
         for (DataSnapshot data : ds.getChildren()) {
             Data p = new Data();
             p.setPelajaran(data.getValue(Data.class).getPelajaran());
+            p.setIsi(data.getValue(Data.class).getIsi());
+            p.setDue(data.getValue(Data.class).getDue());
+
 
             names.add(p.getPelajaran());
+            content.add(p.getIsi());
+            date.add(p.getDue());
         }
 
         if (names.size() > 0) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names);
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names, date, content);
+
             RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
             //myView.setHasFixedSize(true);
+
             myView.setAdapter(adapter);
+
             LinearLayoutManager llm = new LinearLayoutManager(this);
             llm.setOrientation(LinearLayoutManager.VERTICAL);
             myView.setLayoutManager(llm);
+
         } else {
             Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Main Page")
+                // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
     }
 }

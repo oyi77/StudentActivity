@@ -1,10 +1,12 @@
-package id.sch.smktelkom_mlg.learn.studentassistant;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,10 +16,20 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
     public ArrayList<String> myValues;
+    public ArrayList<String> myValuesd;
+    public ArrayList<String> myValuesc;
 
-    public RecyclerViewAdapter(ArrayList<String> myValues) {
-        this.myValues = myValues;
+    public interface IRecyclerViewAdapter
+    {
+        void doEdit(int pos);
     }
+
+    public RecyclerViewAdapter(ArrayList<String> myValues, ArrayList<String> myValuesd, ArrayList<String> myValuesc) {
+        this.myValues = myValues;
+        this.myValuesd = myValuesd;
+        this.myValuesc = myValuesc;
+    }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,6 +40,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.myTextView.setText(myValues.get(position));
+        holder.myTextViewc.setText(myValuesc.get(position));
+        holder.myTextViewd.setText(myValuesd.get(position));
     }
 
 
@@ -36,12 +50,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return myValues.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView myTextView;
+        private TextView myTextViewd;
+        private TextView myTextViewc;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
             myTextView = (TextView) itemView.findViewById(R.id.text_cardview);
+            myTextViewc = (TextView) itemView.findViewById(R.id.text_isi);
+            myTextViewd = (TextView) itemView.findViewById(R.id.text_tgl);
         }
     }
 }

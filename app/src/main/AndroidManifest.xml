@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="id.sch.smktelkom_mlg.learn.studentassistant">
+    package="id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -24,12 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Setting"></activity>
+        <activity android:name=".Setting" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation"
             android:noHistory="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -39,11 +39,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".About" />
-        <activity
-            android:name=".InputJadwal"
-            android:label="@string/title_activity_input_jadwal"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".inputTugas"></activity>
+        <activity android:name=".inputTugas" />
+        <activity android:name=".InputJadwal"></activity>
     </application>
 
 </manifest>

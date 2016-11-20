@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.learn.studentassistant;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-import id.sch.smktelkom_mlg.learn.studentassistant.adapter.HotelAdapter;
-import id.sch.smktelkom_mlg.learn.studentassistant.model.Hotel;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.adapter.HotelAdapter;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.model.Hotel;
 
 public class Setting extends AppCompatActivity {
 

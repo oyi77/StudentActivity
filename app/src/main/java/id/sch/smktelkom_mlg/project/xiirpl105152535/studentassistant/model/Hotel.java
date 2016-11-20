@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.learn.studentassistant.model;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.model;
 
 import android.graphics.drawable.Drawable;
 

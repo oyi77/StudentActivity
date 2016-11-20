@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.learn.studentassistant;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(LoginActivity.this, "Login Error!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "login2 Error!", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -397,7 +397,7 @@ public class LoginActivity extends AppCompatActivity {
 //     */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Login Page") // TODO: Define a title for the content shown.
+                .setName("login2 Page") // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();

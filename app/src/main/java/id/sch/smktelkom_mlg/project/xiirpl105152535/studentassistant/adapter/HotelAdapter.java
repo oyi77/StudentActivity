@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.learn.studentassistant.adapter;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import id.sch.smktelkom_mlg.learn.studentassistant.R;
-import id.sch.smktelkom_mlg.learn.studentassistant.model.Hotel;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.R;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.model.Hotel;
 
 /**
  * Created by Fikri on 05/11/2016.

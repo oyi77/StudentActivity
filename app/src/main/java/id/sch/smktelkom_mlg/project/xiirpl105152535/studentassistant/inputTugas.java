@@ -1,5 +1,6 @@
-package id.sch.smktelkom_mlg.learn.studentassistant;
+package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
-import id.sch.smktelkom_mlg.learn.studentassistant.Data.Data;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
 
 public class inputTugas extends AppCompatActivity {
 
@@ -42,24 +43,29 @@ public class inputTugas extends AppCompatActivity {
                 int dueamonth = due.getMonth();
                 int dueayear = due.getYear();
                 String duea = String.valueOf(dueadate) + "-" + String.valueOf(dueamonth) + "-" + String.valueOf(dueayear);
-
+                String status = "-";
                 //Creating Person object
                 //Person person = new Person();
                 Data data = new Data();
 
-                //Adding values
+//                Adding values
 //                person.setName(name);
 //                person.setAddress(address);
+
                 data.setPelajaran(pelajarana);
                 data.setIsi(isia);
                 data.setDue(duea);
+                data.setStatus(status);
                 Firebase newRef = ref.child(username).child("Task").push();
                 newRef.setValue(data);
 
-                Toast.makeText(inputTugas.this, duea, Toast.LENGTH_SHORT).show();
+                Toast.makeText(inputTugas.this, "Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(inputTugas.this, MainActivity.class));
 
             }
         });
 
+
     }
+
 }
