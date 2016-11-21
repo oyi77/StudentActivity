@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -173,7 +175,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_setting) {
             startActivity(new Intent(MainActivity.this, Setting.class));
         } else if (id == R.id.nav_language) {
-
+            Intent intent = new Intent(MainActivity.this, InputJadwal.class);
+            intent.putExtra("username", Uvalue);
+            startActivity(intent);
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(MainActivity.this, About.class));
         } else if (id == R.id.nav_logout) {
