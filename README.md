@@ -6,10 +6,10 @@ This application will notice the student a night before the exercise and remembe
 ## This Application Still in Alpha Version And Has many bugs!
 
 ### Screenshot
-![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture.PNG)<br>
-![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture1.PNG)<br>
-![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture2.PNG)<br>
-![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture3.PNG)<br>
+![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture.PNG?w=200)
+![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture1.PNG?w=200)<br>
+![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture2.PNG?w=200)
+![Adv. Widget 1](https://github.com/oyi77/StudentActivity/blob/master/Capture3.PNG?w=200)
 
 ### Video
 https://drive.google.com/open?id=0B7At5EedpxFsNE9RdjFuQXFnLVE
