@@ -1,15 +1,19 @@
 package id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant;
 
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -25,6 +29,7 @@ public class inputTugas extends AppCompatActivity {
     EditText isi;
     DatePicker due;
     Button btnSave;
+    TextView cancel;
     int dueadate, dueamonth, dueayear;
 
     Calendar cal = Calendar.getInstance();
@@ -33,6 +38,14 @@ public class inputTugas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_tugas);
+
+    cancel = (TextView) findViewById(R.id.textViewCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         String UValue = "";
 
@@ -59,7 +72,7 @@ public class inputTugas extends AppCompatActivity {
                     String pelajarana = pelajaran.getText().toString().trim();
                     String isia = isi.getText().toString().trim();
                     dueadate = due.getDayOfMonth();
-                    dueamonth = due.getMonth();
+                    dueamonth = due.getMonth()+1;
                     dueayear = due.getYear();
                     String duea = String.valueOf(dueadate) + "-" + String.valueOf(dueamonth) + "-" + String.valueOf(dueayear);
 
@@ -79,10 +92,12 @@ public class inputTugas extends AppCompatActivity {
                     data.setPelajaran(pelajarana);
                     data.setIsi(isia);
                     data.setDue(duea);
+                    data.setStatus("-");
                     Firebase newRef = ref.child(username).child("Task").push();
                     newRef.setValue(data);
 
 
+                    System.out.println("Isi :"+String.valueOf(cal.compareTo(current))+" cal : "+String.valueOf(cal));
                     if (cal.compareTo(current) <= 0) {
                         //The set Date/Time already passed
                         Toast.makeText(getApplicationContext(),
@@ -106,6 +121,22 @@ public class inputTugas extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.input, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.done_act_bar){
+            Toast.makeText(inputTugas.this, "Clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setAlarm(Calendar targetCal) {

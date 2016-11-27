@@ -9,6 +9,11 @@ public class Data {
     private String isi;
     private String due;
     private String status;
+    private String mapel;
+    private String jam;
+    private String hari;
+    private String guru;
+
 
     public Data() {
 
@@ -42,4 +47,31 @@ public class Data {
 
     public void setStatus(String status){this.status = status;}
 
+    public String getMapel() {
+        return mapel;
+    }
+
+    public void setMapel(String mapel) {
+        this.mapel = mapel;
+    }
+
+    public String getJam() {
+        return jam;
+    }
+
+    public void setJam(String jam) {
+        this.jam = jam;
+    }
+
+    public String getHari() {
+        return hari;
+    }
+
+    public void setHari(String hari) {
+        this.hari = hari;
+    }
+
+    public String getGuru(){return guru;}
+
+    public void setGuru(String guru){this.guru = guru;}
 }

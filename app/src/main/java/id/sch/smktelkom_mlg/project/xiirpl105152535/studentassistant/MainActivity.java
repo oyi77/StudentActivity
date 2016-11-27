@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewAdapter.IRecyclerViewAdapter {
     //static final String username = "sandyfschool";
    // final static String DB_URL = "https://studassist-f6998.firebaseio.com/" + username;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity
     ArrayList<String> names = new ArrayList<>();
     ArrayList<String> content = new ArrayList<>();   //menyimpan isi
     ArrayList<String> date = new ArrayList<>();
+    ArrayList<String> key = new ArrayList<>();
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -173,7 +177,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_setting) {
             startActivity(new Intent(MainActivity.this, Setting.class));
         } else if (id == R.id.nav_language) {
-
+            Intent intent = new Intent(MainActivity.this, InputJadwal.class);
+            intent.putExtra("username", Uvalue);
+            startActivity(intent);
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(MainActivity.this, About.class));
         } else if (id == R.id.nav_logout) {
@@ -226,7 +232,7 @@ public class MainActivity extends AppCompatActivity
         names.clear();
         content.clear();
         date.clear();
-
+        key.clear();
 
         for (DataSnapshot data : ds.getChildren()) {
             Data p = new Data();
@@ -234,14 +240,14 @@ public class MainActivity extends AppCompatActivity
             p.setIsi(data.getValue(Data.class).getIsi());
             p.setDue(data.getValue(Data.class).getDue());
 
-
+            key.add(data.getKey());
             names.add(p.getPelajaran());
             content.add(p.getIsi());
             date.add(p.getDue());
         }
 
-        if (names.size() > 0) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names, date, content);
+        if (names.size() >= 0) {
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names, date, content, this);
             RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
             //myView.setHasFixedSize(true);
             myView.setAdapter(adapter);
@@ -251,5 +257,24 @@ public class MainActivity extends AppCompatActivity
         } else {
             Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void doClick(int pos) {
+        //Toast.makeText(MainActivity.this, names.get(pos), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, DetailTugas.class);
+        Bundle extras = new Bundle();
+        extras.putString("judul",names.get(pos));
+        extras.putString("tgl",date.get(pos));
+        extras.putString("isi",content.get(pos));
+        intent.putExtras(extras);
+        startActivity(intent);
+    }
+
+    @Override
+    public void doDone(int pos) {
+
+        Toast.makeText(MainActivity.this, key.get(pos), Toast.LENGTH_SHORT).show();
+        fire.child("/Task/"+key.get(pos)).removeValue();
     }
 }

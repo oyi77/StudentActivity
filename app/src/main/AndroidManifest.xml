@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:allowBackup="true"
@@ -44,10 +46,12 @@
             android:label="@string/title_activity_input_jadwal"
             android:theme="@style/AppTheme" />
         <activity android:name=".inputTugas" />
-        <activity android:name="id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.RegisterActivity" />
-        <activity android:name="id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.ResetPasswordActivity" />
-        <activity android:name="id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.ProfilePage" />
-        <activity android:name="id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Notification"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".ProfilePage" />
+        <activity android:name=".Notification" />
+        <activity android:name=".TampilJadwal" />
+        <activity android:name=".DetailTugas"></activity>
     </application>
 
 </manifest>

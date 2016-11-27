@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_input_tugas"
     android:layout_width="match_parent"
@@ -10,51 +11,79 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.inputTugas"
-    android:weightSum="1">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pelajaran" />
-
-    <EditText
-        android:id="@+id/editTextPelajaran"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="" />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Isi" />
-
-    <EditText
-        android:id="@+id/editTextIsi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Due" />
-
+    android:weightSum="1"
+    android:background="#c0e5ff"
+    app:layout_collapseParallaxMultiplier="1.0">
 
     <DatePicker
         android:id="@+id/datePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:padding="2dp"
         android:layout_gravity="center"
-        android:layout_weight="0.65" />
+        android:theme="@style/AppTheme"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pelajaran"
+        android:textAlignment="center"
+        android:textSize="19dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/editTextPelajaran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType=""
+        android:textColor="@color/colorAccent"
+        android:maxLines="1"
+        android:elevation="2dp"
+        android:layout_margin="4dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Isi"
+        android:textAlignment="center"
+        android:textSize="19dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/editTextIsi"
+        android:textColor="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textMultiLine"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1.03" />
+
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:layout_marginBottom="50dp"/>
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:textSize="24dp"
+        />
+
+    <TextView
+        android:text="Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewCancel"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="-15dp"
+        android:textSize="15dp"/>
 
 
 </LinearLayout>

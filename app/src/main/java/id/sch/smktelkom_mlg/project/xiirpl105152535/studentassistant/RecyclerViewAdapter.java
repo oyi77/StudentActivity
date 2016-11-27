@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 
@@ -20,15 +22,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ArrayList<String> myValuesd;
     public ArrayList<String> myValuesc;
 
+    IRecyclerViewAdapter mIRecyclerViewAdapter;
+
     public interface IRecyclerViewAdapter
     {
-        void doEdit(int pos);
+        void doClick(int pos);
+        void doDone(int pos);
+    }
+    public void setIRecyclerViewAdapter(final IRecyclerViewAdapter iRecyclerViewAdapter){
+        this.mIRecyclerViewAdapter = iRecyclerViewAdapter;
     }
 
-    public RecyclerViewAdapter(ArrayList<String> myValues, ArrayList<String> myValuesd, ArrayList<String> myValuesc) {
+    public RecyclerViewAdapter(ArrayList<String> myValues, ArrayList<String> myValuesd, ArrayList<String> myValuesc, Context context) {
         this.myValues = myValues;
         this.myValuesd = myValuesd;
         this.myValuesc = myValuesc;
+        mIRecyclerViewAdapter = (IRecyclerViewAdapter) context;
     }
 
 
@@ -55,13 +64,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView myTextView;
         private TextView myTextViewd;
         private TextView myTextViewc;
+        ImageButton done;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
+            done = (ImageButton) itemView.findViewById(R.id.imageButton);
             myTextView = (TextView) itemView.findViewById(R.id.text_cardview);
             myTextViewc = (TextView) itemView.findViewById(R.id.text_isi);
             myTextViewd = (TextView) itemView.findViewById(R.id.text_tgl);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mIRecyclerViewAdapter!=null) {
+                        mIRecyclerViewAdapter.doClick(getAdapterPosition());
+                    }
+                }
+            });
+            done.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mIRecyclerViewAdapter.doDone(getAdapterPosition());
+                }
+            });
+
         }
     }
 }
