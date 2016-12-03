@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "257150934215",
+    "firebase_url": "https://studassist-f6998.firebaseio.com",
+    "project_id": "studassist-f6998",
+    "storage_bucket": "studassist-f6998.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257150934215:android:58699ae7f7a927b4",
+        "android_client_info": {
+          "package_name": "id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257150934215-a0kf05gakl8jt48654epo7su7u8lvcsd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD10mLKvV3t26vAb_92clAShOJEBHMtCY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
