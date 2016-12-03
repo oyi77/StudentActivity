@@ -30,10 +30,9 @@ import java.util.ArrayList;
 
 import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    //static final String username = "sandyfschool";
-    // final static String DB_URL = "https://studassist-f6998.firebaseio.com/" + username;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     TextView hello;
     Firebase fire;
