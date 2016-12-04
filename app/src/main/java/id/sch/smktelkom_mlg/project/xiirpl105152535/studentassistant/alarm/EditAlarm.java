@@ -115,7 +115,13 @@ public class EditAlarm extends Activity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.edit);
-
+        String title;
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            title = extras.getString("title");
+        } else {
+            title = mAlarm.getTitle();
+        }
         mTitle = (EditText) findViewById(R.id.title);
         mAlarmEnabled = (CheckBox) findViewById(R.id.alarm_checkbox);
         mOccurence = (Spinner) findViewById(R.id.occurence_spinner);
@@ -127,7 +133,7 @@ public class EditAlarm extends Activity {
 
         mDateTime = new DateTime(this);
 
-        mTitle.setText(mAlarm.getTitle());
+        mTitle.setText(title);
         mTitle.addTextChangedListener(mTitleChangedListener);
 
         mOccurence.setSelection(mAlarm.getOccurence());

@@ -17,16 +17,17 @@ import com.firebase.client.Firebase;
 import java.util.Calendar;
 
 import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.alarm.EditAlarm;
 
 public class inputTugas extends AppCompatActivity {
 
     final static int RQS_1 = 1;
+    private final int NEW_ALARM_ACTIVITY = 0;
     EditText pelajaran;
     EditText isi;
     DatePicker due;
     Button btnSave;
     int dueadate, dueamonth, dueayear;
-
     Calendar cal = Calendar.getInstance();
     Calendar current = Calendar.getInstance();
 
@@ -86,24 +87,26 @@ public class inputTugas extends AppCompatActivity {
 
                     if (cal.compareTo(current) <= 0) {
                         //The set Date/Time already passed
-                        Toast.makeText(getApplicationContext(),
-                                "Invalid Date/Time",
-                                Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Invalid Date/Time",
+//                                Toast.LENGTH_LONG).show();
                     } else {
                         setAlarm(cal);
                     }
 
                     Toast.makeText(inputTugas.this, "DONE", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(),
-                            jam,
-                            Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(inputTugas.this, MainActivity.class));
+//                    Toast.makeText(getApplicationContext(),
+//                            jam,
+//                            Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(inputTugas.this, EditAlarm.class);
+                    intent.putExtra("title", pelajarana + " " + isia);
+                    startActivityForResult(intent, NEW_ALARM_ACTIVITY);
                     finish();
-
                 } else {
                     Toast.makeText(inputTugas.this, "Tanggal sudah lewat", Toast.LENGTH_SHORT).show();
                 }
             }
+
 
         });
 
