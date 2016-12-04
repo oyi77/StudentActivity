@@ -11,14 +11,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -29,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.Data.Data;
+import id.sch.smktelkom_mlg.project.xiirpl105152535.studentassistant.alarm.AlarmMe;
 
 
 public class MainActivity extends AppCompatActivity
@@ -193,11 +191,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_setting) {
-            startActivity(new Intent(MainActivity.this, Setting.class));
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         } else if (id == R.id.nav_language) {
             Intent intent = new Intent(MainActivity.this, InputJadwal.class);
             intent.putExtra("username", Uvalue);
             startActivity(intent);
+        } else if (id == R.id.nav_alarm) {
+            startActivity(new Intent(MainActivity.this, AlarmMe.class));
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(MainActivity.this, About.class));
         } else if (id == R.id.nav_logout) {
@@ -264,16 +264,16 @@ public class MainActivity extends AppCompatActivity
             date.add(p.getDue());
         }
 
-        if (names.size() > 0) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names, date, content);
-            RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
-            //myView.setHasFixedSize(true);
-            myView.setAdapter(adapter);
-            LinearLayoutManager llm = new LinearLayoutManager(this);
-            llm.setOrientation(LinearLayoutManager.VERTICAL);
-            myView.setLayoutManager(llm);
-        } else {
-            Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
-        }
+//        if (names.size() > 0) {
+//            RecyclerViewAdapter adapter = new RecyclerViewAdapter(names, date, content);
+//            RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
+//            //myView.setHasFixedSize(true);
+//            myView.setAdapter(adapter);
+//            LinearLayoutManager llm = new LinearLayoutManager(this);
+//            llm.setOrientation(LinearLayoutManager.VERTICAL);
+//            myView.setLayoutManager(llm);
+//        } else {
+//            Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
+//        }
     }
 }
