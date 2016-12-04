@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void doDone(int pos) {
 
-        Toast.makeText(MainActivity.this, key.get(pos), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"Tugas Selesai", Toast.LENGTH_SHORT).show();
         fire.child("/Task/"+key.get(pos)).removeValue();
     }
 }

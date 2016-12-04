@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -48,9 +49,14 @@
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".ProfilePage" />
         <activity android:name=".Notification" />
+        <activity android:name=".DetailTugas"/>
         <activity android:name=".acc" />
         <activity android:name=".Integration" />
         <activity android:name=".PopUp"></activity>
+        <service android:name=".MyAlarmService"
+            android:enabled="true" />
+
+        <receiver android:name=".MyReceiver"/>
     </application>
 
 </manifest>
