@@ -14,7 +14,7 @@ This application will notice the student a night before the exercise and remembe
 ### Video
 https://drive.google.com/open?id=0B7At5EedpxFsNE9RdjFuQXFnLVE
 ### Link APK
-https://drive.google.com/open?id=0B7At5EedpxFscHNRZzkzbGstVm8
+https://drive.google.com/file/d/0B6JQNE6NFdzAYUVySmI1Q3dyQ0E/view?usp=sharing
 
 ###By Kelompok 5 Kelas XII-R1:<br>
 5 Ajeng Dyahayu Windani     User : ajengwindani<br>
